@@ -139,7 +139,7 @@ public class QueenBoard{
 	test6.solve();
 	System.out.println(test6.toString());
         test6.countSolutions();
-	System.out.println(Integer.toString(test6.getCount()));
+	System.out.println(Integer.toString(test5.getCount()));
 	QueenBoard test5 = new QueenBoard(-3);
 	
     }
