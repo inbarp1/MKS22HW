@@ -10,21 +10,33 @@ public class KnightBoard{
 	    for(int col=0; col< n; col++){
 	        board[row][col]= 0;
 		    }
+	}
     }
 
-
     public String toString(){
-} //blank if you never called solve or when there is no solution
-
+        String f = "";
+	for(int row = 0; row < m; row++){
+	    f += "\n";
+	    for(int col = 0; col < n; col++){
+		if(board[row][col] < 10){
+		    f += " ";
+		}
+		f += (Integer.toString(board[row][col])) +  " ";
+	    }
+	}
+	return f;
+    }
     public void solve(){
-	return solveH(0,0,1);
+       solveH(m/2, n/2, 1);
     }
   
     private boolean solveH(int r,int c, int num){
-	if(count > m * n){
+	if(num > m * n){
 	    return true;
 	}
-	if isOnGoodSpot(r,c){
+	//System.out.println(r + " " + c); 
+	if(isOnGoodPlace(r,c)){
+	    //System.out.println("good place");
 	       	placeKnight(r,c,num);
 		if(solveH(r - 2, c + 1, num +1)){
 		    return true;
@@ -54,17 +66,33 @@ public class KnightBoard{
 	    }
 	return false;
     }
-
-
 	private void placeKnight(int r, int c, int num){
+	    //System.out.println("placing night" + num);
 	    board[r][c] = num;
 	}
 
-	private boolean isGoodPlace(int r, int c){
-	    return board[r][c] == 0 && r < n && c < m && r > = 0 && c > = 0; 
+	private boolean isOnGoodPlace(int r, int c){
+	    // System.out.println("checkign if good place");
+	    return r < m && c < n && r >= 0 && c >= 0 && board[r][c]==0;
 	}
 	
 	private void removeKnight(int r, int c){
 	    board[r][c] = 0;
 	}
+    public static void main(String args[]){
+	System.out.println ("TEST NUMERO UNO");
+	KnightBoard test = new KnightBoard(7,7);
+	test.solve();
+	System.out.println(test.toString());
+	System.out.println ("TEST NUMERO DOS");
+	KnightBoard test2 = new KnightBoard(8,8);
+	test2.solve();
+	System.out.println(test2.toString());
+    }
+	
 }
+
+
+
+	//prioritize moves based on fewest outgoing moves.
+// 2 boards, check for least possible moves
