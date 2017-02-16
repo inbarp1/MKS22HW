@@ -1,5 +1,6 @@
 public class KnightBoard{
-    private int[][]board;
+    private int[][] board;
+    private int[][] moveChecker;
     private int m;
     private int n;
     public KnightBoard(int startingRows,int startingCols){
@@ -66,7 +67,7 @@ public class KnightBoard{
 	    }
 	return false;
     }
-	private void placeKnight(int r, int c, int num){
+      private void placeKnight(int r, int c, int num){
 	    //System.out.println("placing night" + num);
 	    board[r][c] = num;
 	}
@@ -79,6 +80,10 @@ public class KnightBoard{
 	private void removeKnight(int r, int c){
 	    board[r][c] = 0;
 	}
+    public void betterSolve(){}
+    private boolean betterSolveH(int r, int c, int num){}
+    private int[] orderMoves(int r, int c){};
+    
     public static void main(String args[]){
 	System.out.println ("TEST NUMERO UNO");
 	KnightBoard test = new KnightBoard(7,7);
@@ -96,3 +101,7 @@ public class KnightBoard{
 
 	//prioritize moves based on fewest outgoing moves.
 // 2 boards, check for least possible moves
+// create an array of the moves
+// order the array
+// the better solve will go down the aray of the moves
+
