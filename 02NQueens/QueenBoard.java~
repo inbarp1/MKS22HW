@@ -23,9 +23,10 @@ public class QueenBoard{
 	}
 	for(int row=0; row < board.length; row++){
 	    if (addQueen(row, start)){
-		
+		System.out.println(this.toString());
 		if(! solveH(start + 1)){
 		    removeQueen(row, start);
+		System.out.println(this.toString());
 		}
 		else {
 		    return true;
@@ -139,7 +140,7 @@ public class QueenBoard{
 	test6.solve();
 	System.out.println(test6.toString());
         test6.countSolutions();
-	System.out.println(Integer.toString(test5.getCount()));
+	System.out.println(Integer.toString(test6.getCount()));
 	QueenBoard test5 = new QueenBoard(-3);
 	
     }

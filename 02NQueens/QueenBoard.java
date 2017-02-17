@@ -23,9 +23,10 @@ public class QueenBoard{
 	}
 	for(int row=0; row < board.length; row++){
 	    if (addQueen(row, start)){
-		
+		System.out.println(this.toString());
 		if(! solveH(start + 1)){
 		    removeQueen(row, start);
+		System.out.println(this.toString());
 		}
 		else {
 		    return true;
