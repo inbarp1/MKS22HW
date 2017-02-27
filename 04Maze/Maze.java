@@ -17,8 +17,21 @@ public class Maze{
       3. When the file is not found OR there is no E or S then: print an error and exit the program.
     */
     public Maze(String filename){
-        //COMPLETE CONSTRUCTOR
+        animate = false;
+	BufferedReader in = new BufferedReader(new FileReader(filename));
+	String str;
+	while((str = in.readLine()) != null){
+	    maze=str.split(" "); //idk if this will work...
+	    int row = 0
+	    for(int i = 0; i < str.length(); i++){
+		if(in.readLine() == \n){
+		    row++;
+		}
+		maze[row][i]=in.readLine();
+	    }
+	}
     }
+    //check this fxn might notwork....
 
     public void setAnimate(boolean b){
         animate = b;
