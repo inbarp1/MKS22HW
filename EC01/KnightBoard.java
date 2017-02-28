@@ -4,7 +4,9 @@ public class KnightBoard{
     private int[][] moveChecker;
     private int m;
     private int n;
+    private boolean animate;
     public KnightBoard(int startingRows,int startingCols){
+	animate = false;
 	board = new int[startingRows][startingCols];
 	moveChecker=  new int[startingRows][startingCols];
 	m=startingRows;
@@ -67,7 +69,7 @@ public class KnightBoard{
 		if(board[row][col] < 10){
 		    f += " ";
 		}
-		f += (Integer.toString(board[row][col])) +  " ";
+		f += (Integer.toString(board[row][col])) + "+" +(Integer.toString(moveChecker[row][col]))+ " ";
 	    }
 	}
 	return f;
@@ -120,7 +122,7 @@ public class KnightBoard{
 		    for (int delta_r_abs = 1; delta_r_abs <=2 ; delta_r_abs++){
 		    int delta_c_abs = 3-delta_r_abs;
 		    if(isOnGoodPlace(r + delta_r_abs*delta_r_sign, c + delta_c_abs*delta_c_sign)){
-			moveChecker[r + delta_r_abs*delta_r_sign][c + delta_c_abs*delta_c_sign] --;
+			moveChecker[r + delta_r_abs*delta_r_sign][c + delta_c_abs*delta_c_sign]-- ;
 		    }
 		}
 	      }
@@ -149,10 +151,22 @@ public class KnightBoard{
 	}
 
     public void solveFast(){
-	betterSolveH(m/2, n/2, 1);
+	betterSolveH(0, 0, 1);
 	}
+    private void wait(int millis){ //ADDED SORRY!
+         try {
+             Thread.sleep(millis);
+         }
+         catch (InterruptedException e) {
+         }
+     }
 
     private boolean betterSolveH(int r, int c, int num){
+	if(animate){
+	    System.out.println(this);
+	    wait(3000);
+	}
+	
 	int[][]moveList = new int [8][2];
 	if(num > m * n){
 	    return true;
@@ -179,15 +193,15 @@ public class KnightBoard{
     private int[][]orderMoves(int r, int c){
 	int[][]returner= new int[8][2];
 	returner=getList(r,c);
-	for(int move= 0; move < 8; move++){
+	//for(int move= 0; move < 8; move++){
 	    //System.out.println("returner "+move+" is "+returner[move][0]+" , "+returner[move][1]);
-	}
+	//	}
 	int l=findLength(returner);
-	System.out.println("len = "+l);
+	//System.out.println("len = "+l);
 	returner=sortC(returner,l);
-	for(int move= 0; move < 8; move++){
+	//for(int move= 0; move < 8; move++){
 	    // System.out.println("sorted "+move+" is "+returner[move][0]+" , "+returner[move][1]);
-	}
+	//}
 	return returner;
     }
 		    
@@ -289,7 +303,7 @@ public class KnightBoard{
 
     public static void main(String args[]){
 	System.out.println ("TEST NUMERO UNO");
-	KnightBoard test = new KnightBoard(7,7);
+	KnightBoard test = new KnightBoard(20,20);
 	test.solveFast();
 	System.out.println(test.toString());
 	System.out.println ("TEST NUMERO DOS");
@@ -302,7 +316,7 @@ public class KnightBoard{
 
 
 
-	//prioritize moves based on fewest outgoing moves.
+//prioritize moves based on fewest outgoing moves.
 // 2 moveCheckers, check for least possible moves
 // create an array of the moves
 // order the array
