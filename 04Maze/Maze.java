@@ -1,5 +1,8 @@
 import java.util.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 
 public class Maze{
 
@@ -18,20 +21,14 @@ public class Maze{
     */
     public Maze(String filename){
         animate = false;
-	BufferedReader in = new BufferedReader(new FileReader(filename));
-	String str;
-	while((str = in.readLine()) != null){
-	    maze=str.split(" "); //idk if this will work...
-	    int row = 0
-	    for(int i = 0; i < str.length(); i++){
-		if(in.readLine() == \n){
-		    row++;
-		}
-		maze[row][i]=in.readLine();
-	    }
-	}
-    }
-    //check this fxn might notwork....
+	List<String> lines = new List<String>; 
+	lines = Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8);
+	int j = 0;
+	for(int i = 0; j<lines.size(); i++){
+	    if(lines.get() == "\n"){
+		j++;
+		
+		//figure out how to freakin do the scan stuffz 
 
     public void setAnimate(boolean b){
         animate = b;
@@ -41,15 +38,40 @@ public class Maze{
         System.out.println("\033[2J");
     }
 
-
+    private int findstartx(){
+	for(int x=0; x<maze.length(); x++){
+	    for( int y=0; y<maze.length(); y++){
+		if(maze[x][y]=='S'){
+		    return x;
+		}
+	    }
+	}
+	return 0;
+    }
+	
+    private int findstarty(){
+	for(int x=0; x<maze.length(); x++){
+	    for( int y=0; y<maze.length(); y++){
+		if(maze[x][y]=='S'){
+		    return y;
+		}
+	    }
+	}
+	return 0;
+    }
     /*Wrapper Solve Function
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
     public boolean solve(){
-            int startx=0,starty=0;
-            //Initialize startx and starty with the location of the S. 
+	int startx, starty;
+            //Initialize startx and starty with the location of the S.
+	    startx=findstartx();
+	    starty=findstarty();
             maze[startx][starty] = ' ';//erase the S, and start solving!
             return solve(startx,starty);
+    }
+    private isOnGoodPlace(int x, int y){
+	return(x<maze.length && y<maze.length && x>=0 && y>=0 maze[x][y]==' ');
     }
 
     /*
@@ -70,8 +92,27 @@ public class Maze{
             System.out.println(this);
             wait(20);
         }
+	if(maze[x][y]=='E'){
+	    return true;
+	}
+	if(isGoodPlace(x,y)){
+	    maze[x][y]=="@";
+	    if(solve(x+1,y)){
+		return true;
+	    }
+	    if(solve(x,y+1)){
+		return true;
+	    }
+	    if(solve(x-1,y)){
+		return true;
+	    }
+	    if(solve(x, y-1)){
+		return true;
+	    }
+	    maze[x][y]==".";
+	    return false
+		}
 
-        //COMPLETE SOLVE
         return false; //so it compiles
     }
 
