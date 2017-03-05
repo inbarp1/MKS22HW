@@ -1,8 +1,6 @@
+
 import java.util.*;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.charset.StandardCharsets;
 
 public class Maze{
 
@@ -19,15 +17,50 @@ public class Maze{
       2. The maze has a border of '#' around the edges. So you don't have to check for out of bounds!
       3. When the file is not found OR there is no E or S then: print an error and exit the program.
     */
+    
     public Maze(String filename){
-        animate = false;
-	List<String> lines = new List<String>; 
-	lines = Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8);
-	int j = 0;
-	for(int i = 0; j<lines.size(); i++){
-	    if(lines.get() == "\n"){
-		j++;
-		
+	animate = true;
+	try {
+	    String mAzE = "";
+	    File f = new File(filename);
+	    Scanner sc = new Scanner(f);
+	    int line = 0;
+	    while(sc.hasNextLine()){
+		line++;
+		mAzE+= sc.nextLine();
+	    }
+	    maze= new char[line][mAzE.length()/line];
+	    int count = 0;
+	    for( int i = 0; i<maze.length; i++){
+		for(int j=0; j<maze[0].length; j++){
+		    maze[i][j]= mAzE.charAt(count);
+		    count++;
+		}
+	    }
+	} catch(FileNotFoundException e){
+	    System.out.println("Please enter a valid filen name!");
+	}
+    }
+						
+
+    public String toString(){
+	String b = "";
+	for(int i = 0; i < maze.length; i++){
+		for(int j = 0; j < maze[0].length; j++){
+			b += maze[i][j];
+		}
+		b += "\n";
+	}
+	return b;
+	}
+   private void wait(int millis){ //ADDED SORRY!
+         try {
+             Thread.sleep(millis);
+         }
+         catch (InterruptedException e) {
+         }
+	 
+     }
 		//figure out how to freakin do the scan stuffz 
 
     public void setAnimate(boolean b){
@@ -35,12 +68,12 @@ public class Maze{
     }
 
     public void clearTerminal(){
-        System.out.println("\033[2J");
+        System.out.println("\033[2J[1;1H");
     }
 
     private int findstartx(){
-	for(int x=0; x<maze.length(); x++){
-	    for( int y=0; y<maze.length(); y++){
+	for(int x=0; x<maze.length; x++){
+	    for( int y=0; y<maze.length; y++){
 		if(maze[x][y]=='S'){
 		    return x;
 		}
@@ -50,8 +83,8 @@ public class Maze{
     }
 	
     private int findstarty(){
-	for(int x=0; x<maze.length(); x++){
-	    for( int y=0; y<maze.length(); y++){
+	for(int x=0; x<maze.length; x++){
+	    for( int y=0; y<maze.length; y++){
 		if(maze[x][y]=='S'){
 		    return y;
 		}
@@ -70,8 +103,9 @@ public class Maze{
             maze[startx][starty] = ' ';//erase the S, and start solving!
             return solve(startx,starty);
     }
-    private isOnGoodPlace(int x, int y){
-	return(x<maze.length && y<maze.length && x>=0 && y>=0 maze[x][y]==' ');
+    
+    private boolean isGoodPlace(int x, int y){
+	return ((x<maze.length) &&( y<maze.length) && (x>=0) && (y>=0) && ( maze[x][y]==' '));
     }
 
     /*
@@ -91,12 +125,14 @@ public class Maze{
         if(animate){
             System.out.println(this);
             wait(20);
+	    clearTerminal();
+	    
         }
 	if(maze[x][y]=='E'){
 	    return true;
 	}
 	if(isGoodPlace(x,y)){
-	    maze[x][y]=="@";
+	    maze[x][y]='@';
 	    if(solve(x+1,y)){
 		return true;
 	    }
@@ -109,8 +145,8 @@ public class Maze{
 	    if(solve(x, y-1)){
 		return true;
 	    }
-	    maze[x][y]==".";
-	    return false
+	    maze[x][y]='.';
+	    return false;
 		}
 
         return false; //so it compiles
