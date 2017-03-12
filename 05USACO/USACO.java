@@ -5,12 +5,103 @@ public class USACO{
     
     private int R, C, E, N;
     private int [][] land;
+    private int[][]cowgrid;
+    private int N2,M,T,R1,C1,R2,C2;
+    private int [][] graze;
+   
     
     public USACO() {
     }
     public int silver(String filename){
-
+	try{
+	    File name = new File(filename);
+	    Scanner inf = new Scanner(name);
+	    if(inf.hasNextLine()){
+		N2=Integer.parseInt(inf.next());
+		M=Integer.parseInt(inf.next());
+		T=Integer.parseInt(inf.next());
+	    }
+	    cowgrid= new int[N2][M];
+	    graze = new int[N2][M];
+	    for( int r=0; r<N2; r++){
+		inf.nextLine();
+		for(int c=0; c<M; c++){
+		    if (inf.next()== "."){
+		    cowgrid[r][c]=0 ;
+		    graze[r][c]=0;
+		    }
+		    else{
+			cowgrid[r][c]=-1;
+			graze[r][c]=-1;
+		    }
+		}
+	    }
+	    if(inf.hasNextLine()){
+		inf.nextLine();
+		R1=Integer.parseInt(inf.next());
+		C1= Integer.parseInt(inf.next());
+		R2= Integer.parseInt(inf.next());
+		C2= Integer.parseInt(inf.next());
+	    }
+	   }
+	catch (FileNotFoundException e){
+	    System.out.println("File not found");
+	    System.exit(0);
+	}
+	return cowCalculate(R1, C1, R2, C2);
     }
+
+    private int cowCalculate(int r1, int c1, int r2, int c2){
+	while(T > 0){
+	    for( int r= 0; r < N2; r++){
+		for( int c= 0; c< M; c++){   
+		    if(cowgrid[r][c]!= -1){
+			    graze[r][c]= 0;
+			    try{
+				if(cowgrid[r+1][c]!=-1){
+				    graze[r][c]+=cowgrid[r+1][c];
+				}
+			    }
+				 catch(IndexOutOfBoundsException e){}
+			    
+			    try{
+				if(cowgrid[r-1][c]!=-1){
+				    graze[r][c]+=cowgrid[r-1][c];
+				}
+			    }
+				catch(IndexOutOfBoundsException e){}
+			    
+			    try{
+				if(cowgrid[r][c-1]!=-1){
+				    graze[r][c]+=cowgrid[r][c-1];
+				}
+			    }
+				catch(IndexOutOfBoundsException e){}
+			    try{
+				if(cowgrid[r][c+1]!=-1){
+				    graze[r][c]+=cowgrid[r][c+1];
+				}
+			    }
+				catch(IndexOutOfBoundsException e){}
+			    
+		    }
+		}
+	    }
+	    copyArray();
+	    T = T - 1; 
+			
+    }
+	int answer = cowgrid[r2][c2];
+	return answer; 
+    }
+    private void copyArray(){
+	for(int r = 0; r < N2; r++){
+	    for ( int c = 0; c < M; c++){
+		cowgrid[r][c] = graze[r][c];
+	    }
+	}
+    }
+       
     
     public int bronze(String filename){
 	try{
