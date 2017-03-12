@@ -7,7 +7,7 @@ public class Recursion{
         return helperSqrt( n , 1 ) ;
     }
     public static double helperSqrt( double n , double guess ){
-	if(guess == 0){
+	if(guess = = 0){
 	    return 0;
 	}
 	if( guess < 0 || n < 0 ){
