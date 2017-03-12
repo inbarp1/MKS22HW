@@ -24,18 +24,25 @@ public class USACO{
 	    cowgrid= new int[N2][M];
 	    graze = new int[N2][M];
 	    for( int r=0; r<N2; r++){
-		inf.nextLine();
-		for(int c=0; c<M; c++){
-		    if (inf.next()== "."){
-		    cowgrid[r][c]=0 ;
-		    graze[r][c]=0;
-		    }
-		    else{
-			cowgrid[r][c]=-1;
-			graze[r][c]=-1;
-		    }
+		if(inf.hasNextLine()){
+		   inf.nextLine();
+		}
+		if(inf.hasNext()){
+		   String s = inf.next();	
+		   for(int c=0; c<M; c++){
+		       if (s.charAt(c) == '.'){
+			   cowgrid[r][c]=0 ;
+			   graze[r][c]=0;
+		       }
+		       else{
+			   cowgrid[r][c]=-1;
+			   graze[r][c]=-1;
+		       }
+		   }
 		}
 	    }
+	    //System.out.println(blahblah(cowgrid));
+	    // System.out.println(blahblah(graze));
 	    if(inf.hasNextLine()){
 		inf.nextLine();
 		R1=Integer.parseInt(inf.next());
@@ -51,7 +58,10 @@ public class USACO{
 	return cowCalculate(R1, C1, R2, C2);
     }
 
+   
     private int cowCalculate(int r1, int c1, int r2, int c2){
+	cowgrid[r1-1][c1-1]= 1;
+	graze[r1-1][c1-1] = 1;
 	while(T > 0){
 	    for( int r= 0; r < N2; r++){
 		for( int c= 0; c< M; c++){   
@@ -91,7 +101,9 @@ public class USACO{
 	    T = T - 1; 
 			
     }
-	int answer = cowgrid[r2][c2];
+	//System.out.println(r2);
+	//	System.out.println(c2);
+	int answer = cowgrid[r2-1][c2-1];
 	return answer; 
     }
     private void copyArray(){
@@ -138,7 +150,18 @@ public class USACO{
 	}
 	return volumeCalc();
     }
-    
+
+    public String blahblah(int[][]  blah){
+	String x = "";
+	for(int i = 0; i < blah.length; i++){
+	    for(int j = 0; j < blah[i].length; j++){
+		x += blah[i][j]+" ";
+	    }
+	    x+= "\n";
+	}
+	return x;
+    }
+	
     public String blah(){
 	String x = "";
 	for(int i = 0; i < land.length; i++){

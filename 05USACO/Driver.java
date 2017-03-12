@@ -4,6 +4,7 @@ public class Driver{
 	
 	//System.out.println(x.bronze("data1.dat"));
     
-    System.out.println(x.silver("data.txt"));
+    System.out.println(x.silver("data2.txt"));
+    System.out.println(x.silver("data3.txt"));
     }
 }
