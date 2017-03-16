@@ -1,53 +1,97 @@
 import java.util.*;
 public class Quick{
 	public static int quickselect(int []data, int k){
+	    //System.out.println(toString(data));
 	int start = 0;
 	int end = data.length - 1;
-	int check = part(data, start, end);
-	while(check!=k){	
-		if(check > k){
-			end= check;
-			check = part(data,start, end);
-		}
-		if(check < k){
-			start=check;
-			check = part(data, start, end);
-		}
+	return quickSelectHelper(data, start, end, k);
 	}
-	return data[check]; 
-}	
+        
+       	
+
+	
+    public static int quickSelectHelper(int[]data, int start, int end, int k){
+	int check = part(data, start, end);
+	 if(check==k){
+	    return data[check];
+	 }
+	else{
+	    if(check > k){
+		return quickSelectHelper(data,start,check, k); 
+	    }
+	    else{
+		return quickSelectHelper(data,check,end, k-check);
+	    }
+	}
+	 
+    }
 	
     public static int part(int[] data, int start, int end){
-	System.out.println(toString(data));
-	int[] parted = new int[end-start];
+	//System.out.println(toString(data));
 	Random random = new Random();
 	int limit = end - start + 1 ;
-	int s= 0;
-	int e= end - start - 1;
 	int parter = random.nextInt(limit) + start;
-	System.out.println("This is the parter value:");
-	System.out.println(parter);
-        for(int i=start; i<end+1; i++){
-	    if(i!=parter){
-		if(data[i]<data[parter]){
-		    parted[s]= data[i];
-		    s++;
-		}
-		else{
-		    parted[e]=data[i];
-		    e--;
-		}
-	    }	
+       	int parterVal = data[parter];
+	//System.out.println("this is the partition value");
+	//System.out.println(parterVal);
+	boolean needToContinue = true;
+	int movehere= sweepThru(data, start, end, parterVal);
+	//System.out.println("this is where its moving");
+	//System.out.println(movehere);
+	swap(data, movehere,parter);
+	//System.out.println(toString(data));
+	while(needToContinue){
+	    int a = findElement(data,movehere,start, false);
+	    int b = findElement(data, movehere,end, true);
+	    if( a!= -1 &&  b!=-1){
+		swap(data, a, b);
+	    }
+	    else{
+		needToContinue = false;
+	    }
 	}
-	data[s]=parter;
-	int place = 0;
-	for( int i = start; i<end; i++){
-		data[i]=parted[place];
-		place++;
+	//System.out.println("after part");   
+	//System.out.println(toString(data));
+	return movehere;
+       
+    }
+    private static int sweepThru(int[]data, int start, int end, int val){
+	int count = 0;
+	for(int i = start; i<end; i++){
+	    if(data[i]<val){
+		count++;
+	    }
 	}
-	System.out.println(toString(data));
-	return s;
-}
+	return count;
+    }
+			   
+    private static void  swap(int[] data, int a, int b){
+	int change= data[a];
+	data[a]=data[b];
+	data[b]=change;	
+    }
+    private static int findElement(int[]data, int end, int startplace, boolean side){
+	int pivot = data[end];
+	// true is right, false is left
+	if(side){
+	    for(int i=startplace; i>end; i--){
+		if(data[i]<pivot){
+		    return i;
+		}
+	    }
+	    return -1;
+	}
+	else{
+	    for(int i =startplace; i<end; i++){
+		if(data[i]> pivot){
+		    return i;
+			}
+	    }
+	    return -1;
+	}
+    }
+  
+    
 public static String toString(int[]ary){
 	String b = "";
 	for(int i = 0; i < ary.length; i++){
@@ -55,7 +99,7 @@ public static String toString(int[]ary){
 		b += ",";
 	}
 	return b;
-	}
+}
 	public static void main(String[] args){
 		int [] ary = new int[8];
 		ary[0]=2;
@@ -66,7 +110,8 @@ public static String toString(int[]ary){
 		ary[5]=13;
 		ary[6]=6;
 		ary[7]=19;
-		System.out.println(part(ary, 0, 7));
+		//System.out.println(part(ary, 0, 7));
+		//System.out.println(quickselect(ary,5));
 
 	}
 }
