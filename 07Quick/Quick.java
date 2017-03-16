@@ -18,13 +18,16 @@ public class Quick{
 	else{
 	    if(check > k){
 		return quickSelectHelper(data,start,check, k); 
+		// look at smaller half
 	    }
 	    else{
 		return quickSelectHelper(data,check,end, k-check);
+		//have to reduce the k value bc you are looking at the larger half of the array
 	    }
 	}
 	 
     }
+    // this is a  helper fxn that runs recursively 
 	
     public static int part(int[] data, int start, int end){
 	//System.out.println(toString(data));
@@ -49,6 +52,7 @@ public class Quick{
 	    else{
 		needToContinue = false;
 	    }
+	    //in place partitioning
 	}
 	//System.out.println("after part");   
 	//System.out.println(toString(data));
@@ -63,6 +67,7 @@ public class Quick{
 	    }
 	}
 	return count;
+	// returns the proper index for the element ur looking at by counting vals smaller than it. 
     }
 			   
     private static void  swap(int[] data, int a, int b){
@@ -90,7 +95,7 @@ public class Quick{
 	    return -1;
 	}
     }
-  
+    //checks to see if there are values larger than the element or smaller than it on the wrong side
     
 public static String toString(int[]ary){
 	String b = "";
