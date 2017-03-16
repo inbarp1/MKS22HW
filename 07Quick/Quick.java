@@ -13,6 +13,7 @@ public class Quick{
     public static int quickSelectHelper(int[]data, int start, int end, int k){
 	int check = part(data, start, end);
 	 if(check==k){
+	     System.out.println("FINISHED");
 	    return data[check];
 	 }
 	else{
@@ -21,8 +22,8 @@ public class Quick{
 		// look at smaller half
 	    }
 	    else{
-		return quickSelectHelper(data,check,end, k-check);
-		//have to reduce the k value bc you are looking at the larger half of the array
+		return quickSelectHelper(data,check,end, k);
+		//looking at the larger half of the array
 	    }
 	}
 	 
@@ -30,7 +31,7 @@ public class Quick{
     // this is a  helper fxn that runs recursively 
 	
     public static int part(int[] data, int start, int end){
-	//System.out.println(toString(data));
+	System.out.println(toString(data));
 	Random random = new Random();
 	int limit = end - start + 1 ;
 	int parter = random.nextInt(limit) + start;
@@ -39,13 +40,13 @@ public class Quick{
 	//System.out.println(parterVal);
 	boolean needToContinue = true;
 	int movehere= sweepThru(data, start, end, parterVal);
-	//System.out.println("this is where its moving");
-	//System.out.println(movehere);
-	swap(data, movehere,parter);
+       	//System.out.println("this is where its moving");
+	//System.out.println(movehere+start);
+	swap(data, movehere+start,parter);
 	//System.out.println(toString(data));
 	while(needToContinue){
-	    int a = findElement(data,movehere,start, false);
-	    int b = findElement(data, movehere,end, true);
+	    int a = findElement(data,movehere+start,start, false);
+	    int b = findElement(data, movehere+start,end, true);
 	    if( a!= -1 &&  b!=-1){
 		swap(data, a, b);
 	    }
@@ -61,7 +62,7 @@ public class Quick{
     }
     private static int sweepThru(int[]data, int start, int end, int val){
 	int count = 0;
-	for(int i = start; i<end; i++){
+	for(int i = start; i<=end; i++){
 	    if(data[i]<val){
 		count++;
 	    }
@@ -106,20 +107,20 @@ public static String toString(int[]ary){
 	return b;
 }
 	public static void main(String[] args){
-		int [] ary = new int[8];
-		ary[0]=2;
+		int [] ary = new int[9];
+		ary[0]=3;
 		ary[1]=7;
-		ary[2]=5;
-		ary[3]=9;
-		ary[4]=1;
-		ary[5]=13;
-		ary[6]=6;
-		ary[7]=19;
-		//System.out.println(part(ary, 0, 7));
-		//System.out.println(quickselect(ary,5));
+		ary[2]=0;
+		ary[3]=4;
+		ary[4]=5;
+		ary[5]=10;
+		ary[6]=2;
+		ary[7]=1;
+		ary[8]=6;
+		//System.out.println(part(ary, 0, 8));
+		//System.out.println(quickselect(ary,2));
 
 	}
 }
     
 
-	    
