@@ -1,5 +1,23 @@
 import java.util.*;
 public class Quick{
+    public static void quicksort(int[] data){
+	qsh(data, 0, data.length -1); 
+    }
+    public static void qsh(int[] data, int start, int end){
+	//System.out.println(toString(data));
+       //System.out.println(start+" to "+end);
+	if(start>=end){
+	    //System.out.println("I have arrived" + start + end);
+
+	}
+	else{
+	    int i= part(data,start,end);
+	    //System.out.println("the i" + i);
+	    qsh(data, start, i-1);
+	    qsh(data, i+1, end);
+	}
+	
+    }
 	public static int quickselect(int []data, int k){
 	    //System.out.println(toString(data));
 	int start = 0;
@@ -31,7 +49,7 @@ public class Quick{
     // this is a  helper fxn that runs recursively 
 	
     public static int part(int[] data, int start, int end){
-	System.out.println(toString(data));
+	//System.out.println(toString(data));
 	Random random = new Random();
 	int limit = end - start + 1 ;
 	int parter = random.nextInt(limit) + start;
@@ -113,12 +131,15 @@ public static String toString(int[]ary){
 		ary[2]=0;
 		ary[3]=4;
 		ary[4]=5;
-		ary[5]=10;
+		ary[5]=8;
 		ary[6]=2;
 		ary[7]=1;
 		ary[8]=6;
 		//System.out.println(part(ary, 0, 8));
 		//System.out.println(quickselect(ary,2));
+		//System.out.println(toString(ary));
+		quicksort(ary);		   
+		//System.out.println(toString(ary));		   
 
 	}
 }
