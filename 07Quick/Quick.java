@@ -77,8 +77,36 @@ public class Quick{
 	 
     }
     // this is a  helper fxn that runs recursively 
-    
-    public static int part(int[] data, int start, int end){
+    public static int part(int[]data, int start, int end){
+	    Random random = new Random();
+	    int limit = end - start + 1 ;
+	    int parter = random.nextInt(limit) + start;
+	    int v = data[parter];
+	    int n =start;
+	    int lt=start;
+	    int gf=end;
+	    int j=end;
+	    System.out.println("v "+v);
+	    while(n<=gf){
+		//System.out.println("v:"+v+ " lt:"+lt+" gf:"+gf+" j:"+j+ " n"+n);
+		if(data[n]==v){
+		    	n++;
+		    }
+		else if(data[n]<v){
+		    swap(data,n,lt);
+		    lt++;
+		    n++;
+		}
+		else{
+		    swap(data,n,gf);
+		    gf--;
+			}
+	    }
+	    return lt;
+    }
+	   
+	  
+    public static int partTRY(int[] data, int start, int end){
 	//System.out.println(toString(data));
 	Random random = new Random();
 	int limit = end - start + 1 ;
@@ -157,19 +185,20 @@ public static String toString(int[]ary){
 	public static void main(String[] args){
 		int [] ary = new int[9];
 		ary[0]=3;
-		ary[1]=7;
-		ary[2]=0;
-		ary[3]=4;
+		ary[1]=8;
+		ary[2]=5;
+		ary[3]=5;
 		ary[4]=5;
 		ary[5]=8;
 		ary[6]=2;
-		ary[7]=1;
+		ary[7]=8;
 		ary[8]=6;
+		//System.out.println(toString(ary));		   
 		//System.out.println(part(ary, 0, 8));
 		//System.out.println(quickselect(ary,2));
 		//System.out.println(toString(ary));
-		quicksort(ary);		   
-		//	System.out.println(toString(ary));		   
+		//quicksort(ary);		   
+		//System.out.println(toString(ary));		   
 
 	}
 }
