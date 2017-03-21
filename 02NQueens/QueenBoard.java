@@ -89,7 +89,7 @@ public class QueenBoard{
 	    }
 	}
     }
-    public int getCount(){
+    public int getSolutionCount(){
 	return solutionCount;
     }
     
@@ -111,37 +111,58 @@ public class QueenBoard{
 	}
     }
     public static void main(String args[]) {
-	QueenBoard test = new QueenBoard(8);
-	System.out.println("This is an 8x8 board");
-	test.solve();
-	System.out.println(test.toString());
-        test.countSolutions();
-	System.out.println(Integer.toString(test.getCount()));
-    	QueenBoard test2 = new QueenBoard(1);
-	System.out.println("This is an 1x1 board");
-	test2.solve();
-	System.out.println(test2.toString());
-        test2.countSolutions();
-	System.out.println(Integer.toString(test2.getCount()));
-	QueenBoard test3 = new QueenBoard(3);
-	System.out.println("This is an 3x3 board");
-	test3.solve();
-	System.out.println(test3.toString());
-        test3.countSolutions();
-	System.out.println(Integer.toString(test3.getCount()));
-	QueenBoard test4 = new QueenBoard(10);
-	System.out.println("This is an 10X10 board");
-	test4.solve();
-	System.out.println(test4.toString());
-        test4.countSolutions();
-	System.out.println(Integer.toString(test4.getCount()));
-	QueenBoard test6 = new QueenBoard(4);
-	System.out.println("This is an 4X4 board");
-	test6.solve();
-	System.out.println(test6.toString());
-        test6.countSolutions();
-	System.out.println(Integer.toString(test6.getCount()));
-	QueenBoard test5 = new QueenBoard(-3);
-	
+	//QueenBoard test = new QueenBoard(8);
+	//System.out.println("This is an 8x8 board");
+	//test.solve();
+	//System.out.println(test.toString());
+        //test.countSolutions();
+	//	System.out.println(Integer.toString(test.getCount()));
+    	//QueenBoard test2 = new QueenBoard(1);
+	//System.out.println("This is an 1x1 board");
+	//test2.solve();
+	//System.out.println(test2.toString());
+        //test2.countSolutions();
+	//System.out.println(Integer.toString(test2.getCount()));
+	//	QueenBoard test3 = new QueenBoard(3);
+	//System.out.println("This is an 3x3 board");
+	//test3.solve();
+	//System.out.println(test3.toString());
+        //test3.countSolutions();
+	//System.out.println(Integer.toString(test3.getCount()));
+	//QueenBoard test4 = new QueenBoard(10);
+	//System.out.println("This is an 10X10 board");
+	//test4.solve();
+	//System.out.println(test4.toString());
+        //test4.countSolutions();
+	//System.out.println(Integer.toString(test4.getCount()));
+	//QueenBoard test6 = new QueenBoard(4);
+	//System.out.println("This is an 4X4 board");
+	//	test6.solve();
+	//	System.out.println(test6.toString());
+        //test6.countSolutions();
+	//System.out.println(Integer.toString(test6.getCount()));
+	//QueenBoard test5 = new QueenBoard(-3);
+	QueenBoard b;
+	int[]tests =   {2,4, 5,6, 7, 8,  9,10,11};
+	int[]answers = {0,2,10,4,40,92,352,724,2680};
+	int score = 0;
+	for(int i = 0; i < tests.length; i++){
+	    int size = tests[i];
+	    int ans  = answers[i];
+	    b = new QueenBoard(size);
+	    b.countSolutions();
+	    if(b.getSolutionCount()==ans){
+		score++;
+	    }else{
+		System.out.println("Failed board size: "+size );
+	    }
+	}
+	b = new QueenBoard(5);
+	if(b.getSolutionCount() == -1){
+	    score++;
+	}else{
+	    System.out.println("Failed when solution not yet run");
+	}
+	System.out.println("Score: "+score+" / "+(tests.length+1));
     }
 }
