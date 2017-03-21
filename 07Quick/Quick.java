@@ -4,17 +4,47 @@ public class Quick{
 	qsh(data, 0, data.length -1); 
     }
     public static void qsh(int[] data, int start, int end){
-	//System.out.println(toString(data));
-       //System.out.println(start+" to "+end);
+	//	System.out.println(toString(data));
+       	//System.out.println(start+" to "+end);
 	if(start>=end){
-	    //System.out.println("I have arrived" + start + end);
+	    //  System.out.println("I have arrived" + start + end);
 
 	}
 	else{
-	    int i= part(data,start,end);
+	    Random random = new Random();
+	    int limit = end - start + 1 ;
+	    int parter = random.nextInt(limit) + start;
+	    int v = data[parter];
+	    int n =start;
+	    int lt=start;
+	    int gf=end;
+	    int j=end;
+	    //System.out.println("v "+v);
+	    while(n<=gf){
+		//System.out.println("v:"+v+ " lt:"+lt+" gf:"+gf+" j:"+j+ " n"+n);
+		if(data[n]==v){
+		    	n++;
+		    }
+		else if(data[n]<v){
+		    swap(data,n,lt);
+		    lt++;
+		    n++;
+		}
+		else{
+		    swap(data,n,gf);
+		    gf--;
+			}
+	    }
+	    //System.out.println("out of loop. will recurse ["+start+","+lt+") and ("+gf+","+end+")");
 	    //System.out.println("the i" + i);
-	    qsh(data, start, i-1);
-	    qsh(data, i+1, end);
+	    if(lt==gf){
+		qsh(data, start, lt);
+		qsh(data,gf+1,end);
+	    }
+	    else{
+	    qsh(data, start, lt);
+	    qsh(data, gf, end);
+	    }
 	}
 	
     }
@@ -26,7 +56,7 @@ public class Quick{
 	}
         
        	
-
+    
 	
     public static int quickSelectHelper(int[]data, int start, int end, int k){
 	int check = part(data, start, end);
@@ -47,7 +77,7 @@ public class Quick{
 	 
     }
     // this is a  helper fxn that runs recursively 
-	
+    
     public static int part(int[] data, int start, int end){
 	//System.out.println(toString(data));
 	Random random = new Random();
@@ -139,7 +169,7 @@ public static String toString(int[]ary){
 		//System.out.println(quickselect(ary,2));
 		//System.out.println(toString(ary));
 		quicksort(ary);		   
-		//System.out.println(toString(ary));		   
+		//	System.out.println(toString(ary));		   
 
 	}
 }
