@@ -5,7 +5,7 @@ public class Merge{
 	int[]left;
 	System.out.println(toString(ary));				    
 	if(ary.length<=1){
-	    System.out.println("im the basecase!! and ive reached myself");
+	    //System.out.println("im the basecase!! and ive reached myself");
 	}
 	else{
 	    int arysize= ary.length;
@@ -23,54 +23,52 @@ public class Merge{
 		    right[i]= ary[i+arysize/2];
 		}
 	    }
-	    System.out.println("left:");
-	     System.out.println(toString(right));
-	    System.out.println("right:");
-	    System.out.println(toString(right));
+	    //System.out.println("left:");
+	    //System.out.println(toString(right));
+	    // System.out.println("right:");
+	    //System.out.println(toString(right));
 	    mergesort(left);
 	    if(right.length==1){
 	    }
 	    else{
 		mergesort(right);
 	    }
-	    System.out.println("IM MERGING!"+ arysize/2);
+	    // System.out.println("IM MERGING!"+ arysize/2);
 	    merge(ary, left, right);
-	    System.out.println("I MERGED YO ");
+	    // System.out.println("I MERGED YO ");
 
 	}
     }
     public static void merge(int[]ary, int[]left, int[]right){
-	int i= 0;
+	int i=0;
 	int j=0;
         int x=0;
 	System.out.println(toString(ary));
-	while(x<ary.length){
-	    if(i<left.length && j<right.length){
-		if(left[i]<=right[j]){
-		    ary[x]=left[i];
-		    i++;
-		    x++;
-		}
-		else{
-		    ary[x]=right[j];
-		    j++;
-		    x++;
-		}}
-	    else {
-		System.out.println("heyyo im i:" +i+left.length + " and im j:" + j+right.lengt+ " and im x" + x+ " and this is the length"+ ary.length);
-		while(i<left.length){
-		    ary[x]=left[i];
-		    i++;
-		    x++;
-		}
-		while(j<right.length){
-		    ary[x]=right[j];
-		    j++;
-		    x++;
-		}
-	    }
-	}	    
+	while(i < left.length && j < right.length){
+            if(left[i] < right[j]){
+                ary[x] = left[i];
+                i++;
+            }
+            else{
+                ary[x] = right[j];
+                j++;
+            }
+            x++;
+        }
+	System.out.println("up to" + x);
+	System.out.println(toString(ary));
+        if(j < right.length){
+            for(;j < right.length;j++,x++){
+                ary[x] = right[j];
+            }
+        }
+        else{
+            for(;i < left.length;i++,x++){
+                ary[x] = left[i];
+            }
+        }
     }
+
    public static String toString(int[]ary){
 	String b = "";
 	for(int i = 0; i < ary.length; i++){
