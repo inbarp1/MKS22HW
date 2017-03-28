@@ -1,0 +1,9 @@
+import java.util.*;
+public class LNode{
+    int value;
+    LNode reference;
+    public LNode(int val, LNode reference){
+	value=val;
+	reference=ref;
+    }
+}

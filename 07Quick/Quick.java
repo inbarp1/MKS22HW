@@ -183,22 +183,19 @@ public static String toString(int[]ary){
 	return b;
 }
 	public static void main(String[] args){
-		int [] ary = new int[9];
-		ary[0]=3;
-		ary[1]=8;
-		ary[2]=5;
-		ary[3]=5;
-		ary[4]=5;
-		ary[5]=8;
-		ary[6]=2;
-		ary[7]=8;
-		ary[8]=6;
-		//System.out.println(toString(ary));		   
+		int [] ary = new int[50000];
+	        for(int i=0; i<50000; i++){
+		    Random random = new Random();
+		    int n = random.nextInt(1000);
+		    ary[i]=n;
+			}
+		System.out.println(toString(ary));		   
 		//System.out.println(part(ary, 0, 8));
 		//System.out.println(quickselect(ary,2));
 		//System.out.println(toString(ary));
-		//quicksort(ary);		   
-		//System.out.println(toString(ary));		   
+		quicksort(ary);	
+		System.out.println("sorted");
+		System.out.println(toString(ary));		   
 
 	}
 }
