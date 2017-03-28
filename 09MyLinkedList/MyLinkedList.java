@@ -1,9 +1,8 @@
-import java.util.*
-    public class MyLinkedList{
+import java.util.*;
+public class MyLinkedList{
 	LNode start;
 	int size;
-	import java.util.*;
-	public class LNode{
+    public class LNode{
 	    int value;
 	    LNode next;
 	    public LNode(int val, LNode ref){
@@ -14,30 +13,52 @@ import java.util.*
 		value=val;
 		next=null;
 	    }
-	}
-	public boolean add(int value){
+    }
+	public boolean addtoStart(int value){
 	    LNode x = new LNode(value,start);
 	    size+=1;
 	    return true;
 	}
+    public boolean add(int value){
+	LNode current = start;
+	while(current!=null){
+	    current = current.next;
+	}
+	current.next = new LNode(value);
+	return true;
+    }
 	//adds to front 
 	public int size(){
 	    return size;
 	}
 	public String toString(){
-	    String final = "[";
+	    String fin = "[";
 	    LNode current = start;
-	    while(LNode.next=!null){
-		final+=Integer.toString(LNode.value)+",";
+	    while(current.next!= null){
+		fin+=Integer.toString(current.value)+",";
 		current= current.next;
 	    }
-	    final+=Integer.toString(LNode.value)+"]";
-	    return final;
+	    fin+=Integer.toString(current.value)+"]";
+	    return fin;
 	}
-	public int get(int index){
+    public int get(int index){
+	LNode current = start;
+        while(index!=0){
+	    current= current.next;
+	    index--;
 	}
-	//return value of specified element
-	public int set(int index, int newValue){
-	}
-	//changes val at specified index and returns old value
+	return current.value;
     }
+        	//return value of specified element
+    public int set(int index, int newValue){
+	LNode current = start;
+	while(index!=0){
+	    current = current.next;
+	    index--;
+	}
+	int oldie = current.value;
+	current.value = newValue;
+	return oldie;
+    }
+	//changes val at specified index and returns old value
+}
