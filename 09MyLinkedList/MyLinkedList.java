@@ -1,22 +1,41 @@
 import java.util.*;
 public class MyLinkedList{
-	LNode start;
-	int size;
+    LNode start;
+    int size;
+    LNode end;
+    
+    
     public MyLinkedList(){
 	start = null;
+	end = null;
 	size =0;
     }
     public class LNode{
-	    int value;
-	    LNode next;
-	    public LNode(int val, LNode ref){
+	int value;
+	LNode next;
+	LNode prev;
+       
+	public LNode(int val, LNode nex, LNode pre){
 		value=val;
-		next=ref;
+		next=nex;
+		prev= pre;
 	    }
 	    public LNode(int val){
 		value=val;
 		next=null;
+		prev=null;
 	    }
+	public LNode(int val, LNode nex){
+	    value=val;
+	    next=nex;
+	    prev=null;
+	}
+	public LNode(int val, LNode pre){
+	    value=val;
+	    next=null;
+	    prev=pre;
+	}
+	    
     }
 	public boolean addtoStart(int value){
 	    LNode x = new LNode(value,start);
@@ -49,32 +68,24 @@ public class MyLinkedList{
 	    fin+=Integer.toString(current.value)+"]";
 	    return fin;
 	}
-    public int get(int index){
+    public static int get(int index){
 	if(index>=size || index<0){
 	    throw new IndexOutOfBoundsException();
 	}  
-	LNode current = start;
-        while(index!=0){
-	    current= current.next;
-	    index--;
-	}
-	return current.value;
+	LNode current = this.getNode(current);
+        return current.value;
     }
         	//return value of specified element
-    public int set(int index, int newValue){
+    public static int set(int index, int newValue){
 	if(index>=size || index<0){
 	    throw new IndexOutOfBoundsException();
 	}  
-	LNode current = start;
-	while(index!=0){
-	    current = current.next;
-	    index--;
-	}
+	LNode current = this.getNode(index);
 	int oldie = current.value;
 	current.value = newValue;
 	return oldie;
     }
-    public int indexOf(int value){
+    public static  int indexOf(int value){
 	LNode current=start;
 	int index =0;
 	while(current.value!=value){
@@ -95,9 +106,7 @@ public class MyLinkedList{
 	    this.add(value);
 	}
 	else{
-	while(index!=0){
-	    current = current.next;
-	    index--;
+	    current = this.getNode(index);
 	}
 	LNode oldie = new LNode(current.value,current.next);
 	current.value = value;
@@ -105,20 +114,72 @@ public class MyLinkedList{
 	size++;
 	}
     }
-    public int remove(int index){
+    public static int remove(int index){
 	if(index>=size || index<0){
 	    throw new IndexOutOfBoundsException();
 	}   
-	LNode current = start;
-	while(index!=1){
-	    current = current.next;
-	    index--;
-	}
-	int val = (current.next).value;
-	current.next= (current.next).next;
+	LNode current = this.getNode(index);
+        remove(current);
 	size--;
 	return val;
     }
+    private LNode getNode(index){
+	LNode current = start;
+	while(index!=0){
+	    current = current.next;
+	    index--;
+	}
+	return current;
+
+    }
+private void remove(LNode x){
+    if(start!=x && end!=x){
+	(x.prev).next=x,nest;
+	(x.next).prev=x.prev;
+    }
+    else{
+	if(start=x){
+	    start=x.next;
+	    (x.next).prev = null;
+	}
+	if(end=x){
+	    end=x.prev;
+	    (x.prev).next= null;
+	}
+    }
+}
+private void insertAfter(node toBeAdded, node location){
+    if(end!=x){
+	(location.next).prev= toBeAdded;
+	location.next = toBeAdded;
+	toBeAdded.prev= location;
+	toBeadded.next= location.next;
+    }
+    else{
+	location.next = toBeAdded;
+	toBeAdded.prev= location;
+	toBeAdded.next= null;
+    }
+    size--;     
+}
+private void insertBefore(node toBeAdded, node location){
+    if(start!=x){
+	(location.next).prev = toBeAdded;
+	toBeAdded.next= location;
+	toBeadded.prev= location.prev;
+        (location.prev).next= toBeAdded;
+    }
+    else{
+	location.prev = toBeAdded;
+	toBeAdded.next= location;
+	toBeAdded.prev= null;
+    }
+    size++;
+}
+   
+          
+	
+	
 
 	//changes val at specified index and returns old value
     public static void main(String[] args){
