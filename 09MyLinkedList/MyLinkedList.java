@@ -8,6 +8,7 @@ public class MyLinkedList{
 	end = null;
 	size =0;
     }
+    //LNODE CLASS
     public class LNode{
 	int value;
 	LNode next;
@@ -29,6 +30,7 @@ public class MyLinkedList{
 	    next=null;
 	    prev=pre;
 	}
+
 	public String toString(){
 	    String f="";
 	    if(prev==null){
@@ -48,6 +50,8 @@ public class MyLinkedList{
 	  return f;
 	}
     }
+	//LNODE CLASS END
+
 	public boolean addtoStart(int value){
 	    LNode x = new LNode(value);
 	    if(start==null){
@@ -62,6 +66,7 @@ public class MyLinkedList{
 	    }
 	    return true;
 	}
+    //workin!
     public boolean add(int value){
 	LNode current = start;
 	//System.out.println(start.value);
@@ -74,10 +79,13 @@ public class MyLinkedList{
 	end =current.next;
 	return true;
     }
-	//adds to front 
+	//adds to front
+    // works
+
 	public int size(){
 	    return size;
 	}
+
 	public String toString(){
 	    String fin = "[";
 	    LNode current = start;
@@ -89,6 +97,7 @@ public class MyLinkedList{
 	    fin+=current.toString()+"]";
 	    return fin;
 	}
+
     public  int get(int index){
 	if(index>=size || index<0){
 	    throw new IndexOutOfBoundsException();
@@ -123,16 +132,18 @@ public class MyLinkedList{
 	    throw new IndexOutOfBoundsException();
 	}   
 	LNode current = start;
-	System.out.println(current.toString());
+	//System.out.println(current.toString());
 	if(index==size){
 	    this.add(value);
 	}
 	else{
 	    current = this.getNode(index);
-	    System.out.println(current.toString());
+	    //System.out.println(current.toString());
 	}
         LNode newbie = new LNode(value);
-	System.out.println("inserting before");
+	//System.out.println("inserting before");
+	//System.out.println(newbie.toString());
+	//System.out.println(current.toString());
 	insertBefore(newbie, current);
     }
     
@@ -175,9 +186,9 @@ private void remove(LNode x){
     }
 }
 private void insertAfter(LNode toBeAdded, LNode location){
-    System.out.println(end.toString());
+    //System.out.println(end.toString());
     if(end!=location){
-	System.out.println("running end!=loc code");
+	//System.out.println("running end!=loc code");
 	(location.next).prev= toBeAdded;
 	location.next = toBeAdded;
 	toBeAdded.prev= location;
@@ -191,13 +202,16 @@ private void insertAfter(LNode toBeAdded, LNode location){
     size++;     
 }
 private void insertBefore(LNode toBeAdded, LNode location){
+    // System.out.println("start"+start.toString());
     if(start!=location){
-	(location.next).prev = toBeAdded;
+	//System.out.println("HEY");
 	toBeAdded.next= location;
 	toBeAdded.prev= location.prev;
         (location.prev).next= toBeAdded;
+	location.prev = toBeAdded;
     }
     else{
+	//System.out.println("HI");
 	location.prev = toBeAdded;
 	toBeAdded.next= location;
 	toBeAdded.prev= null;
@@ -211,24 +225,7 @@ private void insertBefore(LNode toBeAdded, LNode location){
 
 	//changes val at specified index and returns old value
     public static void main(String[] args){
-	MyLinkedList l = new MyLinkedList();
-	l.addtoStart(1);
-	l.addtoStart(0);
-	l.add(2);
-	l.add(4);
-	System.out.println(l.toString());
-	//System.out.println(l.get(2));
-	// l.set(2,5);
-	//System.out.println(l.toString());
-	//System.out.println(l.indexOf(3));
-	l.add(3,3);
-	System.out.println(l.toString());
-	//l.remove(3);
-	//System.out.println(l.toString());
-	//System.out.println(l.indexOf(6));
-	l.add(5,6);
-        System.out.println(l.toString());
-
+       
 
     }
 
