@@ -1,0 +1,43 @@
+import java.util.*;
+public class Eval{
+    public static double eval(String s){
+	String[] tokens= s.split("");
+	Stack nums = new Stack;
+	for(String token: tokens){
+	    if(isOperation(token)){
+		nums.push(apply(token,nums.pop(),nums.pop()));
+	    }
+	    else{ 
+		nums.push(token);
+	    }
+	    return nums.pop();
+	}
+	private boolean isOperation(String token){
+	    return (s.equals("+")||s.equals("-")||s.equals("*")||s.equals("/")|| s.equals("%"));
+}
+	private double apply(String operator, String A, String B){
+	    if(operator.equals("+")){
+		    return Integer.parseInt(A)+Integer.parseInt(B);
+		}
+	    if(operator.equals("-")){
+		    return Integer.parseInt(A)-Integer.parseInt(B);
+		}
+	    if(operator.equals("*")){
+		    return Integer.parseInt(A)*Integer.parseInt(B);
+	    }
+	    if(operator.equals("/")){
+		    return Integer.parseInt(A)/Integer.parseInt(B);
+	    }
+	    if(operator.equals("%")){
+		    return Integer.parseInt(A)%Integer.parseInt(B);
+	    }
+	    return 0.0;
+	}
+
+	public static void main(String[] args){
+	    System.out.println(eval("10 2.0 +"));
+	    System.out.println(eval("11 3 - 4 + 2.5 *"));
+	    System.out.println(eval("8 2 + 99 9 - * 2 + 9 -"));
+	}
+    }
+       
