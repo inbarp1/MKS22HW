@@ -8,6 +8,15 @@ public class MyDeque{
 	Thedeque=new String[10];
 	size=0;
     }
+    public void print() {
+	String s = "";
+	for(int i=0; i<Thedeque.length; i++){
+	    s+=Thedeque[i] + "] [";
+	}
+	System.out.println(s);
+	System.out.println(front);
+	System.out.println(back);
+    }
     public void addFirst(String s){
 	if(s== null){
 	    throw new NullPointerException();
@@ -16,9 +25,14 @@ public class MyDeque{
 	    if(size==Thedeque.length){
 		resize();
 	    }
-	    front--;
-	    if(front<0){
-		front=Thedeque.length -1;
+	    if ( isEmpty ) {
+		front=1;
+		back=1;
+	    } else {
+		front--;
+		if(front<0){
+		    front=Thedeque.length -1;
+		}
 	    }
 	    Thedeque[front]=s;
 	    isEmpty=false;
@@ -31,10 +45,15 @@ public class MyDeque{
 	    throw new NullPointerException();
 	}
 	else{
+	    if(isEmpty){
+		front=-1;
+		back=-1;
+	    }
 	    if(size== Thedeque.length-1){
 		resize();
 	    }
 	    back++;
+	   
 	    if(back== Thedeque.length-1){
 		back=0;
 	    }
@@ -61,7 +80,7 @@ public class MyDeque{
 	    }
 	    Thedeque[front]= null;
 	    front++;
-	    if(front==Thedeque.length-1){
+	    if(front==Thedeque.length){
 		front=0;
 	    }
 	    size--;
@@ -77,6 +96,7 @@ public class MyDeque{
 	    }
 	    Thedeque[back]=null;
 	    back--;
+	    System.out.println("removed and now " + Thedeque[back]);
 	    if(back<0){
 		back=Thedeque.length-1;
 	    }		
@@ -102,16 +122,19 @@ public class MyDeque{
 	d.addLast("is");
        	d.addFirst("Hi");
 	d.addLast("Inbar");
-	System.out.println(d.getFirst());
-	d.removeFirst();
-        System.out.println(d.getFirst());
-	System.out.println(d.getLast());
-	d.removeLast();
-	System.out.println(d.getLast());
-	d.removeLast();
-	d.removeLast();
-	System.out.println(d.getLast());
-	
+        d.addLast("!");
+	d.addLast("!");
+	d.addLast("!");
+	d.addLast("!");
+	d.addLast("!");
+	d.addLast("!");
+	d.addLast("!");
+	d.addLast("!");
+	d.addLast("!");
+	d.addLast("/");	  
+	//System.out.println(d.getFirst());
+	//System.out.println(d.getLast());
+	d.print();
     }
 	
 	
