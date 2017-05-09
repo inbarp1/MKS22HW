@@ -1,7 +1,8 @@
-public class RunningMedians{
+public class RunningMedian{
     private MyHeap small, large;
     public RunningMedian(){
-	
+	small = new MyHeap();
+	large = new MyHeap();
     }
     public void add(int n){
 	if(n<=small.peek()){
