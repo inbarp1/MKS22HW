@@ -77,11 +77,9 @@ import java.util.*;
 	}
 	     	    
 	private  boolean myCompareTo(String a, String b){
-	    return a.compareTo(b) >= 0;
+	    return a.compareTo(b) * maxOrmin >= 0;
 	}
-	private int anotherComparison(String a, String b){
-	    return maxOrmin * a.compareTo(b);
-	}
+
 	
 	public int getSize(){
 	    return size;
