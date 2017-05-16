@@ -2,7 +2,7 @@ public class Location implements Comparable<Location>{
     private int distToGoal,row, col, distToStart;
     private Location previous;
     private boolean aStar; 
-    public Location(int r, int c, Location p, int dts, int dtg boolean imAstar){
+    public Location(int r, int c, Location p, int dts, int dtg, boolean imAstar){
 	row = r;
 	col = c; 
 	previous = p;
@@ -29,9 +29,9 @@ public class Location implements Comparable<Location>{
 	return previous;
     }
     public int compareTo(Location other){
-	if(isAStar){
-	    int totalD= (this.getPrevious()).getDistanceToGoal()+ this.getDistanceToGoal();
-	    int totalDOther=(other.getPrevious()).getDistanceToGoal()+ other.getDistanceToGoal();
+	if(this.isAStar()){
+	    int totalD= this.getDistToStart()+ this.getDistToGoal();
+	    int totalDOther=other.getDistToStart()+ other.getDistToGoal();
 	    if(totalD>totalDOther){
 		return 1;
 	    }
