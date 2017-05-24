@@ -1,7 +1,15 @@
 public class Location implements Comparable<Location>{
-    private int distToGoal,row, col, distToStart;
+    private int distToGoal,row, col, distToStart, totalD;
     private Location previous;
-    private boolean aStar; 
+    private boolean aStar;
+    public Location(int r, int c, Location p, int dts, int dtg){
+	row = r;
+	col = c; 
+	previous = p;
+	distToStart= dts;
+	distToGoal=dtg;
+	totalD= dts+dtg;
+    }
     public Location(int r, int c, Location p, int dts, int dtg, boolean imAstar){
 	row = r;
 	col = c; 
@@ -9,7 +17,12 @@ public class Location implements Comparable<Location>{
 	distToStart= dts;
 	distToGoal=dtg;
 	aStar= imAstar;
+	totalD= dts+dtg;
     }
+    public String toString(){
+	return "this location is : ("+ row + " , " + col + ")";
+    }
+    
     public boolean isAStar(){
 	return aStar;
     }
@@ -28,27 +41,19 @@ public class Location implements Comparable<Location>{
     public Location getPrevious(){
 	return previous;
     }
+    public int getTotalDistance(){
+	return totalD;
+    }
     public int compareTo(Location other){
-	if(this.isAStar()){
-	    int totalD= this.getDistToStart()+ this.getDistToGoal();
-	    int totalDOther=other.getDistToStart()+ other.getDistToGoal();
-	    if(totalD>totalDOther){
-		return 1;
-	    }
-	    if(totalD==totalDOther){
-		return 0;
-	    }
-	    return -1;
+        if(aStar){
+	    return totalD- other.getTotalDistance();
 	}
 	else{
-	    if(this.getDistToGoal()>other.getDistToGoal()){
-		return 1;
-	    }
-	    if(this.getDistToGoal()==other.getDistToGoal()){
-		return 0;
-	    }
-	    return -1;
+	    return distToGoal-other.getDistToGoal();
 	}
+    }
+    public boolean equals(Location other){
+	return( row == other.getRow()) && (col == other.getColumn());
     }
 	
     
