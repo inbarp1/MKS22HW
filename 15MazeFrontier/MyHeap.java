@@ -29,8 +29,8 @@ import java.util.*;
 	    return f;
 	}
 	      
-	public void add(Locaion s){
-	    maHeap.add(n);
+	public void add(Location s){
+	    maHeap.add(s);
 	    if(size >= 2){
 		pushUp(size);
 	    }
@@ -41,7 +41,7 @@ import java.util.*;
 	    maHeap.set(1, maHeap.get(size));
 	    pushDown(1);
 	    size--;
-	    return oldie.intValue(); 
+	    return oldie; 
 	}
 	public Location  peek(){
 	    return maHeap.get(0);
@@ -50,7 +50,7 @@ import java.util.*;
 	    
 	private void pushUp(int i){
 	    if(myCompareTo(maHeap.get(i),maHeap.get(i/2))&& i/2> 0){
-		int oldie = maHeap.get(i/2);
+		Location  oldie = maHeap.get(i/2);
 		maHeap.set(i/2, maHeap.get(i));
 		maHeap.set(i, oldie);
 		pushUp(i/2);
@@ -58,9 +58,9 @@ import java.util.*;
 	}
 	private void pushDown(int i){
 	    if( 2 * i + 1 <= size){
-		Integer  parent  =  (maHeap.get(i));
-		Integer  firstKid =( maHeap.get(2*i+1));
-		Integer secondKid= (maHeap.get(2*i));
+		Location  parent  =  (maHeap.get(i));
+		Location  firstKid =( maHeap.get(2*i+1));
+		Location  secondKid= (maHeap.get(2*i));
 	    if(parent.compareTo(firstKid) < 1 || parent.compareTo(secondKid) < 1){
 		if(myCompareTo(firstKid, secondKid)){
 		    maHeap.set(2*i+1, parent);

@@ -8,7 +8,7 @@ public class FrontierPriorityQueue implements Frontier{
 	size = size -1;
 	return thelocations.remove();
     }
-    public int getSize(){
+    public int size(){
 	return size;
     }
     public void add(Location newbie){
