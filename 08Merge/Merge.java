@@ -17,26 +17,22 @@ public class Merge{
 		left = new int[arysize/2+1] ;
 		right = new int[arysize/2];
 	    }
-	    for(int i =0; i<(arysize/2); i++){
+	    for(int i =0; i<left.length; i++){
 		left[i]=ary[i];
 		if(i<right.length){
-		    right[i]= ary[i+arysize/2];
+		    right[i]= ary[i+left.length];
 		}
 	    }
 	    //System.out.println("left:");
-	    // System.out.println(toString(left));
+	    //System.out.println(toString(left));
 	    // System.out.println("right:");
-	    // System.out.println(toString(right));
+	    //System.out.println(toString(right));
 	    mergesort(left);
-	    if(right.length==1){
-	    }
-	    else{
-		mergesort(right);
-	    }
+	    mergesort(right);
 	    // System.out.println("IM MERGING!"+ arysize/2);
 	    merge(ary, left, right);
 	    // System.out.println("I MERGED YO ");
-
+	    
 	}
     }
     public static void merge(int[]ary, int[]left, int[]right){
@@ -78,7 +74,8 @@ public class Merge{
 	return b;
    }
     public static void main(String[] args){
-       
+       				    
+
     }
 }
 	
