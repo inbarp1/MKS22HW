@@ -1,14 +1,14 @@
 import java.util.*;
-public class Eval{
+public class StackCalc{
     public static double eval(String s){
 	String[] tokens= s.split(" ");
 	Stack<Double> nums = new Stack<Double>();
 	for(String token: tokens){
 	    if(isOperation(token)){
-		//	System.out.println("reached operator");
+			System.out.println("reached operator");
 		Double test = (apply(token,nums.pop(),nums.pop()));
 		nums.push(test);
-		//System.out.println(test+ " adding");	    	       
+		System.out.println(test+ " adding");	    	       
 	    }
 	    else{ 
 		nums.push(Double.parseDouble(token));
@@ -25,13 +25,13 @@ public class Eval{
 		return A+B;
 		}
 	    if(operator.equals("-")){
-		return Math.abs(A-B);
+		return B-A;
 		}
 	    if(operator.equals("*")){
-		    return A*B;
+		    return 1.0*A*B;
 	    }
 	    if(operator.equals("/")){
-		    return A/B;
+		    return 1.0* B/A;
 	    }
 	    if(operator.equals("%")){
 		return A%B;
